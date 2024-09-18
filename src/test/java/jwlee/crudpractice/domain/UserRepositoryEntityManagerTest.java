@@ -26,15 +26,14 @@ public class UserRepositoryEntityManagerTest extends BaseTest {
     @Test
     public void 엔티티메니저로_find() {
         User user = userRepositoryEntityManager.findById(1L);
-        assertEquals("이진우", user.getName());
+        assertEquals("이진우", user.getUserName());
     }
 
     @Test
     @DisplayName("엔티티 매니저로 insert save")
     public void saveTest() {
         User user1 = User.builder()
-                .email("ejlee@hanatour.com")
-                .name("이어진")
+                .userName("이어진")
                 .build();
         userRepositoryEntityManager.save(user1);
     }
@@ -44,25 +43,25 @@ public class UserRepositoryEntityManagerTest extends BaseTest {
     public void updateTest() {
         // given
         User user = userRepositoryEntityManager.findById(7L);
-        user.setName("이진우");
+        user.setUserName("이진우");
 
         // when
         userRepositoryEntityManager.save(user);
 
         // then
-        assertEquals("이진우", user.getName());
+        assertEquals("이진우", user.getUserName());
     }
 
-    @Test
-    @DisplayName("엔티티 매니저로 영속성 컨텍스트 update save")
-    public void persistContextUpdateTest() {
-        // given
-        User user = userRepositoryEntityManager.findById(7L);
-
-        // when
-        user.setEmail("jinwoo@naver.com");
-
-        // then
-        assertEquals("jinwoo@naver.com", user.getEmail());
-    }
+//    @Test
+//    @DisplayName("엔티티 매니저로 영속성 컨텍스트 update save")
+//    public void persistContextUpdateTest() {
+//        // given
+//        User user = userRepositoryEntityManager.findById(7L);
+//
+//        // when
+//        user.setEmail("jinwoo@naver.com");
+//
+//        // then
+//        assertEquals("jinwoo@naver.com", user.getEmail());
+//    }
 }

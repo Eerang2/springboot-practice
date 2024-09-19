@@ -38,10 +38,9 @@ public class User {
     private String password;
 
     @Builder
-    public User(Long id, String userName, String userId, String password) {
-        this.id = id;
-        this.userName = userName;
+    public User(String userName, String userId, String password) {
         this.userId = userId;
+        this.userName = userName;
         this.password = password;
     }
 //

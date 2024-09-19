@@ -7,19 +7,20 @@
 <body>
 
 <div>
-    <form th:object="${userDto}" method="POST"></form>
-    <label>
-        <input type="text" th:field="*{userId}" placeholder="아이디입력">
-    </label>
-    <label>
-        <input type="text" placeholder="이름">
-    </label>
-    <label>
-        <input type="text" placeholder="비밀번호">
-    </label>
-    <label>
-        <input type="text" placeholder="비밀번호확인">
-    </label>
+    <form th:object="${userDto}" method="POST">
+        <label>
+            <input type="text" th:field="*{userId}" placeholder="아이디입력">
+        </label>
+        <label>
+            <input type="text" placeholder="이름">
+        </label>
+        <label>
+            <input type="text" placeholder="비밀번호">
+        </label>
+        <label>
+            <input type="text" placeholder="비밀번호확인">
+        </label>
+    </form>
 </div>
 </body>
 <th:block th:replace="fragments/below-script-area"></th:block>

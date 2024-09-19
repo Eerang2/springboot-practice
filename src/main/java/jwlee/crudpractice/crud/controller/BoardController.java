@@ -1,7 +1,7 @@
 package jwlee.crudpractice.crud.controller;
 
 
-import jwlee.crudpractice.crud.model.UserDto;
+import jwlee.crudpractice.crud.model.dto.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

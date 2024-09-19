@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 회원가입</title>
+</head>
+<body>
+
+<div>
+    <form th:object="${userDto}" method="POST" action="/save" onsubmit="return validateForm()">
+        <label>
+            <input type="text" th:field="*{userId}" id="userId" onkeyup="validateUserId()" placeholder="아이디입력">
+        </label>
+        <p id="userIdError" style="color:red;"></p>
+
+        <label>
+            <input type="text" th:field="*{userName}" id="userName" onkeyup="validateName()" placeholder="이름">
+        </label>
+        <p id="nameError" style="color:red;"></p>
+
+        <label>
+            <input type="password" th:field="*{password}" id="password" onkeyup="validatePassword()"  placeholder="비밀번호">
+        </label>
+        <p id="passwordError" style="color:red;"></p>
+
+        <label>
+            <input type="password" id="confirmPwd" onkeyup="validatePasswordConfirm()" placeholder="비밀번호확인">
+        </label>
+        <p id="passwordConfirmError" style="color:red;"></p>
+        <button type="submit" >회원가입</button>
+    </form>
+</div>
+</body>
+<script>
+    // 유효성 검사를 수행하는 함수들
+    function validateUserId() {
+        var userId = document.getElementById('userId').value;
+        var userIdRegex = /^[a-zA-Z0-9]{7,15}$/; // 아이디: 영문, 숫자 포함 가능, 7~15글자
+        var userIdError = document.getElementById('userIdError');
+
+        if (!userIdRegex.test(userId)) {
+            userIdError.textContent = "아이디는 영문과 숫자를 포함한 7~15글자여야 합니다.";
+            return false;
+        } else {
+            userIdError.textContent = ""; // 정상 입력 시 에러 메시지 제거
+            return true;
+        }
+    }
+
+    function validateName() {
+        var name = document.getElementById('userName').value;
+        var nameRegex = /^[가-힣]{3,10}$/; // 이름: 한글만 3~10글자
+        var nameError = document.getElementById('nameError');
+
+        if (!nameRegex.test(name)) {
+            nameError.textContent = "이름은 한글 3~10글자여야 합니다.";
+            return false;
+        } else {
+            nameError.textContent = "";
+            return true;
+        }
+    }
+
+    function validatePassword() {
+        var password = document.getElementById('password').value;
+        var passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,20}$/; // 비밀번호: 영문, 숫자, 특수문자 필수, 8~20글자
+        var passwordError = document.getElementById('passwordError');
+
+        if (!passwordRegex.test(password)) {
+            passwordError.textContent = "비밀번호는 영문, 숫자, 특수문자를 포함한 8~20글자여야 합니다.";
+            return false;
+        } else {
+            passwordError.textContent = "";
+            return true;
+        }
+    }
+
+    function validatePasswordConfirm() {
+        var password = document.getElementById('password').value;
+        var passwordConfirm = document.getElementById('confirmPwd').value;
+        var passwordConfirmError = document.getElementById('passwordConfirmError');
+
+        if (password !== passwordConfirm) {
+            passwordConfirmError.textContent = "비밀번호가 일치하지 않습니다.";
+            return false;
+        } else {
+            passwordConfirmError.textContent = "";
+            return true;
+        }
+    }
+
+    // 최종 제출 시 모든 필드를 확인
+    function validateForm() {
+        return validateUserId() && validateName() && validatePassword() && validatePasswordConfirm();
+    }
+</script>
+<th:block th:replace="fragments/below-script-area"></th:block>
+</html>
